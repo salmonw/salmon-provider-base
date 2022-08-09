@@ -1,0 +1,42 @@
+{
+  "name": "salmon-provider-template",
+  "version": "0.0.2",
+  "description": "Template and basic classes for developing a blockchain provider",
+  "main": "index.js",
+  "engines": {
+    "node": ">=14.17.0"
+  },
+  "scripts": {
+    "linter": "eslint ./ --fix",
+    "publish:patch": "npm version patch && npm publish",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salmonw/salmon-provider-template.git"
+  },
+  "keywords": [
+    "wallet",
+    "solana",
+    "near",
+    "ethereum",
+    "binance smart chain"
+  ],
+  "author": "",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/salmonw/salmon-provider-teamplte/issues"
+  },
+  "homepage": "https://github.com/salmonw/salmon-provider-template",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.18.6",
+    "jest": "^28.1.0"
+  },
+  "jest": {
+    "testTimeout": 240000
+  },
+  "dependencies": {
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}
