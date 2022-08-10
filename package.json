@@ -1,15 +1,16 @@
 {
   "name": "salmon-provider-template",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "description": "Template and basic classes for developing a blockchain provider",
-  "main": "index.js",
+  "main": "lib/index.js",
   "engines": {
     "node": ">=14.17.0"
   },
   "scripts": {
     "linter": "eslint ./ --fix",
-    "publish:patch": "npm version patch && npm publish",
-    "test": "jest"
+    "publish:patch": "npm version patch && npm prepublish &&npm publish",
+    "test": "jest",
+    "prepublish": "npx tsc"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,11 @@
     "testTimeout": 240000
   },
   "dependencies": {
+    "@solana/web3.js": "^1.50.1",
+    "axios": "^0.27.2",
+    "bip39": "^3.0.4",
+    "bn.js": "^5.2.1",
+    "ed25519-hd-key": "^1.3.0",
     "ts-node": "^10.8.2",
     "typescript": "^4.7.4"
   }
