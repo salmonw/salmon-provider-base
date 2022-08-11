@@ -8,8 +8,9 @@ const parseAmount = (amount, decimals, precision = 5) => {
   return parseFloat(`${integer}.${fraction}`);
 };
 
-const formatAmount = (amount, decimals) => {
-  return new BN(amount).div(new BN(10).pow(new BN(decimals))).toString();
-};
+const formatAmount = (amount, decimals) => new BN(amount)
+  .div(
+    new BN(10).pow(new BN(decimals)),
+  ).toString();
 
 export { parseAmount, formatAmount };

@@ -36,7 +36,6 @@ export default abstract class Account {
   abstract getTokens() : Promise<object[]>;
   abstract getBalance() : Promise<object>;
   abstract getReceiveAddress() : string;
-  abstract getOrCreateTokenAccount(toPublicKey: object, token: string) : Promise<object>;
   abstract validateDestinationAccount(address: string) : Promise<object>;
   abstract transfer(
     destination: string,

@@ -13,7 +13,7 @@ For example:
 
 - [Instalation and usage](#instalation)
   
-- [Collaborating](#collaborating)
+- [Contributing](#contributing)
 
 - [Extending account](#extending-account)  
 
@@ -38,7 +38,22 @@ $ npm install --save @salmon/provider-base.js
 
 
 ---
-## <a id="collaborating"></a> Collaborating
+## <a id="contributing"></a> Contributing
+
+### Requirements
+
+- node version 16
+- yarn
+
+### Testing and Linting
+
+Run ```yarn test``` to run the tests once.
+
+Run ```yarn lint``` to run the linter
+
+### 
+
+
 ---
 ## <a id="extending-account"></a>  Extending account
 
