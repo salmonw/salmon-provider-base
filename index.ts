@@ -1,4 +1,4 @@
-export { Account } from './src/Account';
+export * as Account from './src/Account';
 export * from './src/services/common-balance-service';
 export * from './src/services/format';
 export * from './src/services/price-service';

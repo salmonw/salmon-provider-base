@@ -8,13 +8,13 @@
   },
   "scripts": {
     "linter": "eslint ./ --fix",
-    "publish:patch": "npm version patch && npm prepublish &&npm publish",
+    "publish:patch": "npm version patch && npm prepublish && npm publish",
     "test": "jest",
     "prepublish": "npx tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/salmonw/salmon-provider-template.git"
+    "url": "git+https://github.com/salmonw/salmon-provider-base.git"
   },
   "keywords": [
     "wallet",
@@ -26,11 +26,10 @@
   "author": "",
   "license": "GPL-3.0-only",
   "bugs": {
-    "url": "https://github.com/salmonw/salmon-provider-teamplte/issues"
+    "url": "https://github.com/salmonw/salmon-provider-base/issues"
   },
-  "homepage": "https://github.com/salmonw/salmon-provider-template",
-  "devDependencies": {
-    "@babel/preset-typescript": "^7.18.6",
+  "homepage": "https://github.com/salmonw/salmon-provider-base",
+  "devDependencies": {    
     "jest": "^28.1.0"
   },
   "jest": {
