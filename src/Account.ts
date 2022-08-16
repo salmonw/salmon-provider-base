@@ -1,4 +1,4 @@
-export default abstract class Account {
+abstract class Account {
   private mnemonic : string;
 
   private keyPair : any;
@@ -14,6 +14,15 @@ export default abstract class Account {
   networkId : string;
 
   chain : string;
+
+  constructor(mnemonic: string, keyPair: any, path: string, index: number, networkId: string) {    
+    this.setSeedPhrase(mnemonic);
+    this.setKeyPair(keyPair);
+    this.publicKey = keyPair.publicKey;
+    this.path = path;
+    this.index = index;
+    this.networkId = networkId;    
+  }
 
   setSeedPhrase(mnemonic) {
     this.mnemonic = mnemonic;
@@ -60,7 +69,7 @@ export default abstract class Account {
   }
   abstract getCurrentNetwork() : Promise<object>;
   abstract getChain() : string;
-  abstract getDomainFromPublicKey(publicKey: object) : Promise<string>;
-  abstract getPublicKeyFromDomain(domain: string) : Promise<object>;
   abstract getRecentTransactions(lastSignature : string) : Promise<object[]>;
 }
+
+export {Account}
