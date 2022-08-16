@@ -1,6 +1,6 @@
 {
   "name": "salmon-provider-template",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Template and basic classes for developing a blockchain provider",
   "main": "lib/index.js",
   "engines": {
