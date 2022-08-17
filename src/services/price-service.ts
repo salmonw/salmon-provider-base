@@ -25,7 +25,7 @@ const fetchPrices = async (coinsGroups) => {
   const prices = await Promise.all(
     coinsGroups.map(async (group) => {
       const result = await axios.get(
-        `${PRICE_ENDPOINT}?ids=${group.coins}&vs_currencies=usd&include_24hr_change=true`
+        `${PRICE_ENDPOINT}?ids=${group.coins}&vs_currencies=usd&include_24hr_change=true`,
       );
       return result.data;
     }),

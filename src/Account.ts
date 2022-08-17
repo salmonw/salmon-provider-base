@@ -15,13 +15,13 @@ abstract class Account {
 
   chain : string;
 
-  constructor(mnemonic: string, keyPair: any, path: string, index: number, networkId: string) {    
+  constructor(mnemonic: string, keyPair: any, path: string, index: number, networkId: string) {
     this.setSeedPhrase(mnemonic);
     this.setKeyPair(keyPair);
     this.publicKey = keyPair.publicKey;
     this.path = path;
     this.index = index;
-    this.networkId = networkId;    
+    this.networkId = networkId;
   }
 
   setSeedPhrase(mnemonic) {
@@ -69,7 +69,14 @@ abstract class Account {
   }
   abstract getCurrentNetwork() : Promise<object>;
   abstract getChain() : string;
-  abstract getRecentTransactions(lastSignature : string) : Promise<object[]>;
+  abstract getRecentTransactions(lastSignature : string) : Promise<object[]>;  
+  static restoreAccount(mnemonic: string, networkId: string) : Account{
+    throw new Error('not implemented!');
+  }
+  static restoreDerivedAccounts(mnemonic: string, networkId: string) : Account[]{
+    throw new Error('not implemented!');
+  }
+  
 }
 
-export {Account}
+export { Account };

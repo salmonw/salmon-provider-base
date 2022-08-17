@@ -1,6 +1,6 @@
 const getPreviousTokenBalance = (balance: any) => {
   const { usdBalance, last24HoursChange } = balance;
-  const percentage = last24HoursChange.perc || 0;
+  const percentage = last24HoursChange?.perc || 0;
   const tokenBalance = usdBalance / (1 - percentage / 100) || 0;
   return tokenBalance;
 };

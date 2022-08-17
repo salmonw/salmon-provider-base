@@ -37,7 +37,7 @@ function generateFirstKeyPair(mnemonic, coinType) {
 }
 
 function generateDerivedKeyPairs(mnemonic, coinType, count) {
-  let derivedKeys = [];
+  const derivedKeys = [];
   const seed = bip39.mnemonicToSeedSync(mnemonic, '');
   for (let i = 0; i < count; i++) {
     const { path, index, keyPair } = generateKeyPairByIndex(seed, coinType, i);

@@ -8,13 +8,9 @@ const getLast24HoursChange = (balances, usdTotal) => {
   };
 };
 
-const getPreviousTotal = (balances) => {
-  return balances.reduce((currentValue, next) => getPreviousTokenBalance(next) + currentValue, 0);
-};
+const getPreviousTotal = (balances) => balances.reduce((currentValue, next) => getPreviousTokenBalance(next) + currentValue, 0);
 
-const getPreviousTokenBalance = (balance) => {
-  return balance.usdBalance / (1 - balance.last24HoursChange?.perc / 100) || 0;
-};
+const getPreviousTokenBalance = (balance) => balance.usdBalance / (1 - balance.last24HoursChange?.perc / 100) || 0;
 
 module.exports = {
   getLast24HoursChange,

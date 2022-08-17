@@ -48,31 +48,31 @@ const fetchPrices = async (coinsGroups) => {
   const prices = await Promise.all(
     coinsGroups.map(async (group) => {
       const result = await axios.get(
-        `${PRICE_ENDPOINT}?ids=${group.coins}&vs_currencies=usd&include_24hr_change=true`
+        `${PRICE_ENDPOINT}?ids=${group.coins}&vs_currencies=usd&include_24hr_change=true`,
       );
       return result.data;
-    })
+    }),
   );
   return prices;
 };
 
-const decorate = (coins, prices) => {
-  return coins.map((coin) => {
-    const { id, symbol, name, usdBalance } = coin;
-    const usdPrice = prices[id].usd;
-    const perc24HoursChange = prices[id].usd_24h_change;
-    return {
-      id,
-      symbol,
-      name,
-      usdPrice: usdPrice || null,
-      perc24HoursChange: perc24HoursChange || null,
-    };
-  });
-};
+const decorate = (coins, prices) => coins.map((coin) => {
+  const {
+    id, symbol, name, usdBalance,
+  } = coin;
+  const usdPrice = prices[id].usd;
+  const perc24HoursChange = prices[id].usd_24h_change;
+  return {
+    id,
+    symbol,
+    name,
+    usdPrice: usdPrice || null,
+    perc24HoursChange: perc24HoursChange || null,
+  };
+});
 
 const joinArray = (array) => {
-  let result = [];
+  const result = [];
   array.forEach((items) => {
     Object.keys(items).forEach((id) => {
       result[id] = items[id];
@@ -82,7 +82,7 @@ const joinArray = (array) => {
 };
 
 function chunkArray(array, size) {
-  var results = [];
+  const results = [];
   while (array.length) {
     results.push(array.splice(0, size));
   }
