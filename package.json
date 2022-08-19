@@ -8,7 +8,7 @@
   },
   "scripts": {
     "linter": "eslint ./ --fix",
-    "publish:patch": "npm version patch && npm prepublish && npm publish",
+    "publish:patch": "npm version patch && npm run prepublish && npm publish",
     "test": "jest",
     "prepublish": "npx tsc"
   },
