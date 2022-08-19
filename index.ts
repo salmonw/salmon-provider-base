@@ -5,3 +5,6 @@ export * from './src/services/price-service';
 export * from './src/services/mnemonic-service';
 export * from './src/services/token-decorator';
 export * from './src/constants/coin-types';
+export * from './src/types/balance';
+export * from './src/types/coin';
+export * from './src/types/token';
