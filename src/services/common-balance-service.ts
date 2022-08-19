@@ -1,11 +1,13 @@
-const getPreviousTokenBalance = (balance: any) => {
+import { IBalanceItem } from './balance';
+
+const getPreviousTokenBalance = (balance : IBalanceItem) => {
   const { usdBalance, last24HoursChange } = balance;
-  const percentage = last24HoursChange?.perc || 0;
+  const percentage = last24HoursChange.perc || 0;
   const tokenBalance = usdBalance / (1 - percentage / 100) || 0;
   return tokenBalance;
 };
 
-const getPreviousTotal = (balances) => {
+const getPreviousTotal = (balances: IBalanceItem[]) => {
   const total = balances.reduce((
     currentValue,
     next,
@@ -13,7 +15,7 @@ const getPreviousTotal = (balances) => {
   return total;
 };
 
-const getLast24HoursChange = (balances, usdTotal) => {
+const getLast24HoursChange = (balances: IBalanceItem[], usdTotal: number) => {
   const prevUsdTotal = getPreviousTotal(balances);
   const usd24HoursChange = usdTotal - prevUsdTotal;
   const perc24HoursChange = (usd24HoursChange * 100) / prevUsdTotal;

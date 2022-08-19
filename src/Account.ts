@@ -1,47 +1,43 @@
-abstract class Account {
+abstract class Account<KP, PK, CN> {
   private mnemonic : string;
 
-  private keyPair : any;
+  private keyPair : KP;
 
-  connection?: any;
+  connection?: CN;
 
   path : string;
 
   index : number;
 
-  publicKey : any;
+  publicKey : PK;
 
   networkId : string;
 
   chain : string;
 
-  constructor(mnemonic: string, keyPair: any, path: string, index: number, networkId: string) {
+  constructor(mnemonic: string, keyPair: KP, path: string, index: number, networkId: string) {
     this.setSeedPhrase(mnemonic);
     this.setKeyPair(keyPair);
-    this.publicKey = keyPair.publicKey;
+    this.setPublicKey(keyPair);
     this.path = path;
     this.index = index;
     this.networkId = networkId;
   }
 
-  setSeedPhrase(mnemonic) {
+  setSeedPhrase(mnemonic: string) {
     this.mnemonic = mnemonic;
   }
 
-  setKeyPair(keyPair) {
-    this.keyPair = keyPair;
-    this.publicKey = keyPair.publicKey;
-  }
+  abstract setKeyPair(keyPair: KP);
+  abstract setPublicKey(keyPair: KP);
 
-  retrieveSecureSeedPhrase() {
+  retrieveSecureSeedPhrase() : string {
     return this.mnemonic;
   }
 
-  retrieveSecureKeyPair() {
-    return this.keyPair;
-  }
+  abstract retrieveSecureKeyPair() : KP;
 
-  abstract getConnection() : Promise<any>;
+  abstract getConnection() : Promise<CN>;
   abstract getTokens() : Promise<object[]>;
   abstract getBalance() : Promise<object>;
   abstract getReceiveAddress() : string;
@@ -67,16 +63,20 @@ abstract class Account {
   static getNetworks() : Promise<object[]> {
     throw new Error('not implemented!');
   }
+
   abstract getCurrentNetwork() : Promise<object>;
   abstract getChain() : string;
-  abstract getRecentTransactions(lastSignature : string) : Promise<object[]>;  
-  static restoreAccount(mnemonic: string, networkId: string) : Account{
+  abstract getRecentTransactions(lastSignature : string) : Promise<object[]>;
+  static restoreAccount<KP, PK, CN>(mnemonic: string, networkId: string) : Account<KP, PK, CN> {
     throw new Error('not implemented!');
   }
-  static restoreDerivedAccounts(mnemonic: string, networkId: string) : Account[]{
+
+  static restoreDerivedAccounts<KP, PK, CN>(
+    mnemonic: string,
+    networkId: string,
+  ) : Account<KP, PK, CN>[] {
     throw new Error('not implemented!');
   }
-  
 }
 
 export { Account };

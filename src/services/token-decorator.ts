@@ -1,4 +1,11 @@
-const decorateBalanceList = async (items, tokens) => {
+import { IBalanceItem } from './balance';
+import { ICoin } from './coin';
+import { IToken } from './token';
+
+const decorateBalanceList = (
+  items: IBalanceItem[],
+  tokens: IToken[],
+): IBalanceItem[] => {
   const result = items.map((item) => {
     const token = tokens.find((t) => t.address === item.mint);
     return { ...item, ...token };
@@ -6,8 +13,8 @@ const decorateBalanceList = async (items, tokens) => {
   return result;
 };
 
-const getLast24HoursChange = (price, usdBalance) => {
-  if (price?.perc24HoursChange === undefined || price?.perc24HoursChange === null) {
+const getLast24HoursChange = (price: ICoin, usdBalance) => {
+  if (price.perc24HoursChange === undefined || price.perc24HoursChange === null) {
     return null;
   }
 
@@ -20,16 +27,16 @@ const getLast24HoursChange = (price, usdBalance) => {
   };
 };
 
-const decorateBalancePrices = async (items, prices) => {
+const decorateBalancePrices = (items: IBalanceItem[], prices: ICoin[]) => {
   const result = items.map((item) => {
     const price = item.symbol
-      ? prices.find((t) => t.symbol.toUpperCase() === item.symbol.toUpperCase())
+      ? prices.find((t: ICoin) => t.symbol.toUpperCase() === item.symbol.toUpperCase())
       : null;
-    const usdBalance = price?.usdPrice ? item.uiAmount * price.usdPrice : null;
+    const usdBalance = price.usdPrice ? item.uiAmount * price.usdPrice : null;
     const last24HoursChange = getLast24HoursChange(price, usdBalance);
     return {
       ...item,
-      usdPrice: price?.usdPrice,
+      usdPrice: price.usdPrice,
       usdBalance,
       last24HoursChange,
     };

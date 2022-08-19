@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ICoin, ICoinPrice } from './coin';
 
 const BASE_ENDPOINT = 'https://api.coingecko.com';
 const COINS_ENDPOINT = `${BASE_ENDPOINT}/api/v3/coins/list?include_platform=true`;
@@ -7,25 +8,25 @@ const PRICE_ENDPOINT = `${BASE_ENDPOINT}/api/v3/simple/price`;
 const SOLANA_PLATFORM = 'solana';
 const NEAR_PLATFORM = 'near-protocol';
 
-function chunkArray(array, size) {
-  const results = [];
-  while (array.length) {
+function chunkArray(array: string[], size: number): string[][] {
+  const results: string[][] = [];
+  while (array.length > 0) {
     results.push(array.splice(0, size));
   }
   return results;
 }
-const joinCoins = (coins) => {
-  const ids = coins.map((c) => c.id);
-  const chunks = chunkArray(ids, 200);
-  const commaCoins = chunks.map((chunk) => ({ coins: chunk.join(',') }));
+const joinCoins = (coins: ICoin[]): string[] => {
+  const ids: string[] = coins.map((c: ICoin) => c.id);
+  const chunks: string[][] = chunkArray(ids, 200);
+  const commaCoins: string[] = chunks.map((chunk: string[]) => (chunk.join(',')));
   return commaCoins;
 };
 
-const fetchPrices = async (coinsGroups) => {
+const fetchPrices = async (coinsGroups: string[]): Promise<ICoinPrice[]> => {
   const prices = await Promise.all(
     coinsGroups.map(async (group) => {
-      const result = await axios.get(
-        `${PRICE_ENDPOINT}?ids=${group.coins}&vs_currencies=usd&include_24hr_change=true`,
+      const result = await axios.get<ICoinPrice>(
+        `${PRICE_ENDPOINT}?ids=${group}&vs_currencies=usd&include_24hr_change=true`,
       );
       return result.data;
     }),
@@ -33,8 +34,8 @@ const fetchPrices = async (coinsGroups) => {
   return prices;
 };
 
-const joinArray = (array) => {
-  const result = [];
+const joinArray = (array: ICoinPrice[]): ICoinPrice[] => {
+  const result: ICoinPrice[] = [];
   array.forEach((items) => {
     Object.keys(items).forEach((id) => {
       result[id] = items[id];
@@ -43,10 +44,11 @@ const joinArray = (array) => {
   return result;
 };
 
-const decorate = (coins, prices) => coins.map((coin) => {
+const decorate = (coins: ICoin[], prices: ICoinPrice[]) => coins.map((coin): ICoin => {
   const { id, symbol, name } = coin;
-  const usdPrice = prices[id].usd;
-  const perc24HoursChange = prices[id].usd_24h_change;
+  const coinPrice :ICoinPrice = prices[id];
+  const usdPrice = coinPrice.usd;
+  const perc24HoursChange = coinPrice.usd_24h_change;
   return {
     id,
     symbol,
@@ -56,32 +58,32 @@ const decorate = (coins, prices) => coins.map((coin) => {
   };
 });
 
-const getCoinsByPlatform = async (platform) => {
-  const response = await axios.get(COINS_ENDPOINT);
-  const coins = response.data.filter((c) => c.platforms[platform]);
+const getCoinsByPlatform = async (platform: string):Promise<ICoin[]> => {
+  const response = await axios.get<ICoin[]>(COINS_ENDPOINT);
+  const coins = response.data.filter((c:ICoin) => c.platforms[platform]);
   return coins;
 };
 
-const getPrices = async (coins) => {
+const getPrices = async (coins: ICoin[]) => {
   const coinsGroups = joinCoins(coins);
-  const pricesGroups = await fetchPrices(coinsGroups);
+  const pricesGroups: ICoinPrice[] = await fetchPrices(coinsGroups);
   const prices = joinArray(pricesGroups);
   const coinsWithPrice = decorate(coins, prices);
   return coinsWithPrice;
 };
 
-const getPricesByPlatform = async (platform) => {
+const getPricesByPlatform = async (platform: string) => {
   const coins = await getCoinsByPlatform(platform);
   return getPrices(coins);
 };
 
-const getCoinsByIds = async (ids) => {
-  const response = await axios.get(`${COINS_ENDPOINT}&ids=${(ids || []).join(',')}`);
+const getCoinsByIds = async (ids: string[]): Promise<ICoin[]> => {
+  const response = await axios.get<ICoin[]>(`${COINS_ENDPOINT}&ids=${(ids).join(',')}`);
   const coins = response.data;
   return coins;
 };
 
-const getPricesByIds = async (ids) => {
+const getPricesByIds = async (ids: string[]): Promise<ICoin[]> => {
   const coins = await getCoinsByIds(ids);
   return getPrices(coins);
 };
