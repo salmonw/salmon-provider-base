@@ -1,6 +1,6 @@
-import { IBalanceItem } from './balance';
-import { ICoin } from './coin';
-import { IToken } from './token';
+import { IBalanceItem } from '../types/balance';
+import { ICoin } from '../types/coin';
+import { IToken } from '../types/token';
 
 const decorateBalanceList = (
   items: IBalanceItem[],

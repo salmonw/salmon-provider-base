@@ -1,4 +1,4 @@
-import { IBalanceItem } from './balance';
+import { IBalanceItem } from '../types/balance';
 
 const getPreviousTokenBalance = (balance : IBalanceItem) => {
   const { usdBalance, last24HoursChange } = balance;

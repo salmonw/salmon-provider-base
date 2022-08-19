@@ -3,7 +3,7 @@ import { BN } from 'bn.js';
 const parseAmount = (amount: number, decimals: number, precision = 5):number => {
   const bigNumber = new BN(amount);
   const divider = new BN(10).pow(new BN(decimals));
-  const integer: number = bigNumber.div(divider);
+  const integer = bigNumber.div(divider);
   const fraction = bigNumber.mod(divider).toString().substring(0, precision);
   return parseFloat(`${integer}.${fraction}`);
 };

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ICoin, ICoinPrice } from './coin';
+import { ICoin, ICoinPrice } from '../types/coin';
 
 const BASE_ENDPOINT = 'https://api.coingecko.com';
 const COINS_ENDPOINT = `${BASE_ENDPOINT}/api/v3/coins/list?include_platform=true`;
