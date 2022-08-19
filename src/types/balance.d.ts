@@ -7,7 +7,7 @@ interface IBalance {
 interface IBalanceItem {
   mint: string,
   owner: string,
-  amount: string,
+  amount: number,
   decimals: number,
   uiAmount: number,
   symbol: string,
