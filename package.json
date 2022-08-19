@@ -1,6 +1,6 @@
 {
   "name": "@salmonw/provider-base",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Template and basic classes for developing a blockchain provider",
   "main": "lib/index.js",
   "engines": {
