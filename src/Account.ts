@@ -26,20 +26,20 @@ abstract class Account<KP, PK, CN> {
     this.networkId = networkId;
   }
 
-  setSeedPhrase(mnemonic: string) {
+  setSeedPhrase(mnemonic: string):void {
     this.mnemonic = mnemonic;
   }
 
-  setKeyPair(keyPair: KP) {
+  setKeyPair(keyPair: KP):void {
     this.keyPair = keyPair;
   }
-  abstract setPublicKey(publicKey: PK);
+  abstract setPublicKey(publicKey: PK):void;
 
   retrieveSecureSeedPhrase() : string {
     return this.mnemonic;
   }
 
-  retrieveSecureKeyPair() {
+  retrieveSecureKeyPair():KP {
     return this.keyPair;
   }
 
