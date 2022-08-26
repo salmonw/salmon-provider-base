@@ -30,10 +30,10 @@ abstract class Account<KP, PK, CN> {
     this.mnemonic = mnemonic;
   }
 
-  setKeyPair(keyPair: KP){
+  setKeyPair(keyPair: KP) {
     this.keyPair = keyPair;
   }
-  abstract setPublicKey(keyPair: KP);
+  abstract setPublicKey(publicKey: PK);
 
   retrieveSecureSeedPhrase() : string {
     return this.mnemonic;
