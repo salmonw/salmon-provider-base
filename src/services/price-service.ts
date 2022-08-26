@@ -64,7 +64,7 @@ const getCoinsByPlatform = async (platform: string):Promise<ICoin[]> => {
   return coins;
 };
 
-const getPrices = async (coins: ICoin[]) => {
+const getPrices = async (coins: ICoin[]) :Promise<ICoin[]> => {
   const coinsGroups = joinCoins(coins);
   const pricesGroups: ICoinPrice[] = await fetchPrices(coinsGroups);
   const prices = joinArray(pricesGroups);
@@ -72,7 +72,7 @@ const getPrices = async (coins: ICoin[]) => {
   return coinsWithPrice;
 };
 
-const getPricesByPlatform = async (platform: string) => {
+const getPricesByPlatform = async (platform: string):Promise<ICoin[]> => {
   const coins = await getCoinsByPlatform(platform);
   return getPrices(coins);
 };

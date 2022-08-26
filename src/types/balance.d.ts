@@ -14,9 +14,9 @@ interface IBalanceItem {
   name: string,
   logo: string,
   address: string,
-  usdPrice: number,
-  usdBalance: number,
-  last24HoursChange: IBalancePrice
+  usdPrice?: number,
+  usdBalance?: number,
+  last24HoursChange?: IBalancePrice
 }
 
 interface IBalancePrice {

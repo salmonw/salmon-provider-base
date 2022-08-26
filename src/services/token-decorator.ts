@@ -1,14 +1,24 @@
 import { IBalanceItem } from '../types/balance';
 import { ICoin } from '../types/coin';
-import { IToken } from '../types/token';
+import { IToken, ITokenBalance } from '../types/token';
 
 const decorateBalanceList = (
-  items: IBalanceItem[],
+  items: ITokenBalance[],
   tokens: IToken[],
 ): IBalanceItem[] => {
   const result = items.map((item) => {
     const token = tokens.find((t) => t.address === item.mint);
-    return { ...item, ...token };
+    return { 
+      mint: item.mint,
+      owner: item.owner,
+      amount: item.amount,
+      decimals: item.decimals,
+      uiAmount: item.uiAmount,
+      symbol: token.symbol,
+      name: token.name,
+      logo: token.logo,
+      address: token.address,
+    };
   });
   return result;
 };
@@ -27,7 +37,7 @@ const getLast24HoursChange = (price: ICoin, usdBalance) => {
   };
 };
 
-const decorateBalancePrices = (items: IBalanceItem[], prices: ICoin[]) => {
+const decorateBalancePrices = (items: IBalanceItem[], prices: ICoin[]):IBalanceItem[] => {
   const result = items.map((item) => {
     const price = item.symbol
       ? prices.find((t: ICoin) => t.symbol.toUpperCase() === item.symbol.toUpperCase())

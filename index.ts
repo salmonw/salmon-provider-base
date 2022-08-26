@@ -7,4 +7,5 @@ export * from './src/services/token-decorator';
 export * from './src/constants/coin-types';
 export * from './src/types/balance';
 export * from './src/types/coin';
+export * from './src/types/config';
 export * from './src/types/token';
