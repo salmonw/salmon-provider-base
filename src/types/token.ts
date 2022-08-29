@@ -2,7 +2,7 @@ interface IToken {
   symbol: string,
   name: string,
   decimals: number,
-  logo: string,
+  logo?: string | undefined,
   address: string,
   chainId: number;
 }

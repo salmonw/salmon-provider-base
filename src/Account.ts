@@ -33,7 +33,8 @@ abstract class Account<KP, PK, CN> {
   setKeyPair(keyPair: KP): void {
     this.keyPair = keyPair;
   }
-  abstract setPublicKey(publicKey: KP): void;
+
+  abstract setPublicKey(keyPair: KP):void;
 
   retrieveSecureSeedPhrase(): string {
     return this.mnemonic;
