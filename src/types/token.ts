@@ -4,18 +4,18 @@ interface IToken {
   decimals: number,
   logo: string,
   address: string,
-  chainId: number
+  chainId: number;
 }
 
 interface ITokenBalance {
   mint: string,
   owner: string,
-  amount: number
+  amount: number;
   decimals: number,
-  uiAmount: number
+  uiAmount: number;
 }
 
 export {
   IToken,
-  ITokenBalance
+  ITokenBalance,
 };

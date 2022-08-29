@@ -8,7 +8,7 @@ const decorateBalanceList = (
 ): IBalanceItem[] => {
   const result = items.map((item) => {
     const token = tokens.find((t) => t.address === item.mint);
-    return { 
+    return {
       mint: item.mint,
       owner: item.owner,
       amount: item.amount,
@@ -37,7 +37,7 @@ const getLast24HoursChange = (price: ICoin, usdBalance) => {
   };
 };
 
-const decorateBalancePrices = (items: IBalanceItem[], prices: ICoin[]):IBalanceItem[] => {
+const decorateBalancePrices = (items: IBalanceItem[], prices: ICoin[]): IBalanceItem[] => {
   const result = items.map((item) => {
     const price = item.symbol
       ? prices.find((t: ICoin) => t.symbol.toUpperCase() === item.symbol.toUpperCase())

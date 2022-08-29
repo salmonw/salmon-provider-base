@@ -1,11 +1,11 @@
 interface INetwork {
   id: string,
-  description: string
+  description: string;
 }
 
 interface INetworkConfigItem {
- networkId: string,
- nodeUrl: string,
+  networkId: string,
+  nodeUrl: string,
 }
 
 export {

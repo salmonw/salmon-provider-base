@@ -1,21 +1,21 @@
-import { INetwork, INetworkConfigItem } from "./types/config";
+import { INetwork, INetworkConfigItem } from './types/config';
 
 abstract class Account<KP, PK, CN> {
-  private mnemonic : string;
+  private mnemonic: string;
 
-  private keyPair : KP;
+  private keyPair: KP;
 
   connection?: CN;
 
-  path : string;
+  path: string;
 
-  index : number;
+  index: number;
 
-  publicKey : PK;
+  publicKey: PK;
 
-  networkId : string;
+  networkId: string;
 
-  chain : string;
+  chain: string;
 
   constructor(mnemonic: string, keyPair: KP, path: string, index: number, networkId: string) {
     this.setSeedPhrase(mnemonic);
@@ -26,52 +26,52 @@ abstract class Account<KP, PK, CN> {
     this.networkId = networkId;
   }
 
-  setSeedPhrase(mnemonic: string):void {
+  setSeedPhrase(mnemonic: string): void {
     this.mnemonic = mnemonic;
   }
 
-  setKeyPair(keyPair: KP):void {
+  setKeyPair(keyPair: KP): void {
     this.keyPair = keyPair;
   }
-  abstract setPublicKey(publicKey: PK):void;
+  abstract setPublicKey(publicKey: KP): void;
 
-  retrieveSecureSeedPhrase() : string {
+  retrieveSecureSeedPhrase(): string {
     return this.mnemonic;
   }
 
-  retrieveSecureKeyPair():KP {
+  retrieveSecureKeyPair(): KP {
     return this.keyPair;
   }
 
-  abstract getConnection() : Promise<CN>;
-  abstract getTokens() : Promise<object[]>;
-  abstract getBalance() : Promise<object>;
-  abstract getReceiveAddress() : string;
-  abstract validateDestinationAccount(address: string) : Promise<object>;
+  abstract getConnection(): Promise<CN>;
+  abstract getTokens(): Promise<object[]>;
+  abstract getBalance(): Promise<object>;
+  abstract getReceiveAddress(): string;
+  abstract validateDestinationAccount(address: string): Promise<object>;
   abstract transfer(
     destination: string,
     token: string,
-    amount: number    
-  ) : Promise<string>;
-  abstract airdrop(amount: number) : Promise<object>;
-  abstract getAllNfts() : Promise<object[]>;
-  abstract getAllNftsGrouped() : Promise<object[]>;
+    amount: number
+  ): Promise<string>;
+  abstract airdrop(amount: number): Promise<object>;
+  abstract getAllNfts(): Promise<object[]>;
+  abstract getAllNftsGrouped(): Promise<object[]>;
   abstract getBestSwapQuote(
     nToken: string,
     outToken: string,
     amount: number,
     slippage: number
-  ) : Promise<object>;
-  abstract executeSwapTransaction(routeId : string) : Promise<object>;
-  abstract createSwapTransaction(transactionId : string) : Promise<string>;
-  abstract setNetwork(networkId : string) : void;
-  static getNetworks() : Promise<INetwork[]> {
+  ): Promise<object>;
+  abstract executeSwapTransaction(routeId: string): Promise<object>;
+  abstract createSwapTransaction(transactionId: string): Promise<string>;
+  abstract setNetwork(networkId: string): void;
+  static getNetworks(): Promise<INetwork[]> {
     throw new Error('not implemented!');
   }
 
-  abstract getCurrentNetwork() : Promise<INetworkConfigItem>;
-  abstract getChain() : string;
-  abstract getRecentTransactions(lastSignature : string) : Promise<object[]>;
+  abstract getCurrentNetwork(): Promise<INetworkConfigItem>;
+  abstract getChain(): string;
+  abstract getRecentTransactions(lastSignature: string): Promise<object[]>;
   static restoreAccount(mnemonic: string, networkId: string) {
     throw new Error('not implemented!');
   }
