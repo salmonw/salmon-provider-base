@@ -3,8 +3,8 @@ interface ICoin {
   symbol: string,
   name: string,
   platforms?: Record<string, string>,
-  usdPrice: number,
-  perc24HoursChange: number
+  usdPrice: number | null,
+  perc24HoursChange: number | null
 }
 
 interface ICoinPrice {

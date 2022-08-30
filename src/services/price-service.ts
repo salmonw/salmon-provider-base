@@ -60,7 +60,7 @@ const decorate = (coins: ICoin[], prices: ICoinPrice[]) => coins.map((coin): ICo
 
 const getCoinsByPlatform = async (platform: string):Promise<ICoin[]> => {
   const response = await axios.get<ICoin[]>(COINS_ENDPOINT);
-  const coins = response.data.filter((c:ICoin) => c.platforms[platform]);
+  const coins = response.data.filter((c:ICoin) => c.platforms && c.platforms[platform]);
   return coins;
 };
 

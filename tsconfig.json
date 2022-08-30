@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strictNullChecks": true,
     "outDir": "./lib",
     "sourceMap": true,
     "declaration": true,

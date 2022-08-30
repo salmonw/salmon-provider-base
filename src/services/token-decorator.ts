@@ -14,10 +14,10 @@ const decorateBalanceList = (
       amount: item.amount,
       decimals: item.decimals,
       uiAmount: item.uiAmount,
-      symbol: token.symbol,
-      name: token.name,
-      logo: token.logo,
-      address: token.address,
+      symbol: token?.symbol,
+      name: token?.name,
+      logo: token?.logo,
+      address: token?.address,
     };
   });
   return result;
@@ -25,7 +25,7 @@ const decorateBalanceList = (
 
 const getLast24HoursChange = (price: ICoin, usdBalance) => {
   if (price.perc24HoursChange === undefined || price.perc24HoursChange === null) {
-    return null;
+    return undefined;
   }
 
   const perc = price.perc24HoursChange;
@@ -40,13 +40,14 @@ const getLast24HoursChange = (price: ICoin, usdBalance) => {
 const decorateBalancePrices = (items: IBalanceItem[], prices: ICoin[]): IBalanceItem[] => {
   const result = items.map((item) => {
     const price = item.symbol
-      ? prices.find((t: ICoin) => t.symbol.toUpperCase() === item.symbol.toUpperCase())
+      ? prices.find((t: ICoin) => t.symbol.toUpperCase() === item.symbol?.toUpperCase())
       : null;
-    const usdBalance = price.usdPrice ? item.uiAmount * price.usdPrice : null;
+    if (!price) return item;
+    const usdBalance = price.usdPrice ? item.uiAmount * price.usdPrice : undefined;
     const last24HoursChange = getLast24HoursChange(price, usdBalance);
     return {
       ...item,
-      usdPrice: price.usdPrice,
+      usdPrice: price?.usdPrice || undefined,
       usdBalance,
       last24HoursChange,
     };
