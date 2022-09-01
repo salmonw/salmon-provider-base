@@ -20,7 +20,8 @@ const decorateBalanceList = (
       address: token?.address,
     };
   });
-  return result;
+  const validTokens = result.filter((t) => t.name);
+  return validTokens;
 };
 
 const getLast24HoursChange = (price: ICoin, usdBalance) => {
